@@ -1,4 +1,3 @@
-
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
@@ -10,10 +9,16 @@ const AllocationForm = (props) => {
     const [action, setAction] = useState('');
 
     const submitEvent = () => {
+            // Validate cost is a number
+            if (!Number.isFinite(parseFloat(cost))) {
+            alert('Please enter a valid number for cost.');
+            return;
+            }
 
-            if(cost > remaining) {
-                alert("The value cannot exceed remaining funds  £"+remaining);
-                setCost("");
+            const costValue = parseFloat(cost);
+            if (costValue > remaining) {
+                alert(`The value cannot exceed remaining funds £${remaining}`);
+                setCost(''); // Reset the cost field
                 return;
             }
 
@@ -27,11 +32,11 @@ const AllocationForm = (props) => {
                 payload: expense,
             });
         } else {
-                dispatch({
-                    type: 'ADD_EXPENSE',
-                    payload: expense,
-                });
-            }
+            dispatch({
+                type: 'ADD_EXPENSE',
+                payload: expense,
+            });
+        }
     };
 
     return (
