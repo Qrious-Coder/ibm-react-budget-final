@@ -9,7 +9,6 @@ const AllocationForm = (props) => {
     const [action, setAction] = useState('');
 
     const submitEvent = () => {
-            // Validate cost is a number
             if (!Number.isFinite(parseFloat(cost))) {
             alert('Please enter a valid number for cost.');
             return;
@@ -18,7 +17,7 @@ const AllocationForm = (props) => {
             const costValue = parseFloat(cost);
             if (costValue > remaining) {
                 alert(`The value cannot exceed remaining funds £${remaining}`);
-                setCost(''); // Reset the cost field
+                setCost(''); 
                 return;
             }
 
@@ -71,7 +70,6 @@ const AllocationForm = (props) => {
                     type='number'
                     id='cost'
                     value={cost}
-                    // style={{ marginLeft: '2rem' , size: 10}}
                     onChange={(event) => setCost(event.target.value)}>
                     </input>
                 <button className="btn btn-primary" onClick={submitEvent} >
